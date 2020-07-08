@@ -1,12 +1,19 @@
 <template>
-  <div>
-    <h3>Login</h3>
-    <input type="text" v-model="username" />
-    <input type="password" v-model="password" />
-    <button @click="sendlogin">Login</button>
+  <div class="container">
+    <h3 class="login-introduce">KANBAN JOB</h3>
+    <form class="login-form">
+      <input type="text" placeholder="Username" v-model="username" />
+      <input type="password" placeholder="*******" v-model="password" />
+      <button type="button" @click="sendlogin" class="btn btn-primary">
+        Login
+      </button>
+      {{ error }}
+      <p>consulta</p>
+      <p>con123*</p>
+    </form>
   </div>
 </template>
-
+// class="btn btn-primary"
 <script>
 import api from "../services";
 
@@ -36,4 +43,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.login-form {
+  max-width: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+}
+.login-introduce {
+  margin-top: 2rem;
+  font-size: 3.1rem;
+}
+</style>

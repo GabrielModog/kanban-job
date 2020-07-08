@@ -7,8 +7,6 @@ import Login from "./components/Login";
 
 Vue.use(VueRouter);
 
-Vue.config.productionTip = false;
-
 const routes = [
   {
     path: "/",
@@ -24,6 +22,8 @@ const router = new VueRouter({
   mode: "history",
   routes,
 });
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,

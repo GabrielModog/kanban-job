@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h3>Home</h3>
-    <button @click="logout">Log out</button>
+  <div class="container">
+    <div class="row">
+      <h3>Home</h3>
+      <button type="button" @click="logout" class="btn btn-danger">
+        Log out
+      </button>
+    </div>
   </div>
 </template>
 
