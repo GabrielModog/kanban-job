@@ -120,6 +120,6 @@ input {
 .column {
   display: flex;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 10px;
 }
 </style>

@@ -77,6 +77,9 @@ export default {
   font-size: 0.85rem;
   padding: 1rem;
   border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px #8395a757;
+  cursor: grab;
+  color: #2c3a47;
 }
 .card-container {
   width: 286px;
@@ -90,6 +93,7 @@ export default {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   padding-bottom: 10px;
+  box-shadow: 0px 1px 2px 0px #8395a7d5;
 }
 .column-title {
   width: 300px;
@@ -105,5 +109,6 @@ export default {
 }
 .content-top-adjustment {
   margin-top: 20px;
+  justify-content: space-around;
 }
 </style>

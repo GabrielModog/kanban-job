@@ -55,5 +55,6 @@ export default {
 .login-introduce {
   margin-top: 2rem;
   font-size: 3.1rem;
+  color: #222f3e;
 }
 </style>
