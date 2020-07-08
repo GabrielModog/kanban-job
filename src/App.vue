@@ -19,6 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #f7f8f9;
 }
 
 input {
@@ -64,6 +65,7 @@ input {
   font-size: 1.1rem;
   border-radius: 4px;
   background-color: #2c3a47;
+  color: white;
   display: inline;
   transition: 350ms;
 }
@@ -113,5 +115,11 @@ input {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
 }
 </style>

@@ -1,19 +1,27 @@
 <template>
   <div class="container">
-    <div class="row">
-      <h3>Home</h3>
+    <nav class="nav">
+      <h3>KANBAN JOB</h3>
       <button type="button" @click="logout" class="btn btn-danger">
         Log out
       </button>
+    </nav>
+    <div class="row"></div>
+    <div class="row">
+      <Board />
     </div>
   </div>
 </template>
 
 <script>
+import Board from "./Board";
 import api from "../services";
 
 export default {
   name: "Home",
+  components: {
+    Board,
+  },
   data() {
     return {
       users: [],
@@ -45,4 +53,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 55px;
+  background-color: #cad3c8;
+}
+.nav h3 {
+  color: #222f3e;
+}
+</style>
