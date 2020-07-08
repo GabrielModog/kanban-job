@@ -8,7 +8,7 @@
     </nav>
     <div class="row"></div>
     <div class="row">
-      <Board />
+      <Board v-if="!isLoading" v-bind:cards="cardsArray" />
     </div>
   </div>
 </template>
@@ -24,7 +24,8 @@ export default {
   },
   data() {
     return {
-      users: [],
+      cardsArray: [],
+      isLoading: true,
     };
   },
   created() {
@@ -41,7 +42,10 @@ export default {
 
     api
       .get("/job", config)
-      .then((res) => console.log(res))
+      .then((res) => {
+        this.cardsArray = res.data.data.data;
+        this.isLoading = false;
+      })
       .catch(console.log);
   },
   methods: {
