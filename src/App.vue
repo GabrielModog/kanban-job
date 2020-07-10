@@ -9,6 +9,7 @@ export default {
 </script>
 
 <style>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css");
 html,
 * {
   margin: 0;
@@ -61,8 +62,8 @@ input {
 .btn {
   border: none;
   cursor: pointer;
-  padding: 0.4rem 1rem;
-  font-size: 1.1rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 14px;
   border-radius: 4px;
   background-color: #2c3a47;
   color: white;

@@ -1,61 +1,100 @@
 <template>
-  <div class="row content-top-adjustment">
-    <!-- <button type="button" @click="addCard" class="btn btn-primary">
-      Teste
-    </button> -->
-    <!-- <div class="column">
-      <div v-for="element in filterArrayTest" :key="element.code">
-        {{ element.code }}
-      </div>
-    </div> -->
-
-    <div class="column board-column">
-      <h3 class="column-title">Backlog</h3>
-      <draggable class="card-container" :list="cards" group="tasks">
-        <div class="card" v-for="element in cards" :key="element.id">
-          {{ element.code }}
-        </div>
-      </draggable>
-      <button type="button" class="btn">New task</button>
+  <div class="column">
+    <div>
+      <button type="button" class="btn btn-primary">
+        <i class="fas fa-folder-plus"></i>Criar Card
+      </button>
     </div>
-
-    <div class="column board-column">
-      <h3 class="column-title">Backlog</h3>
-      <draggable class="card-container" :list="holdArray" group="tasks">
-        <div class="card" v-for="element in holdArray" :key="element.id">
-          {{ element.code }}
-        </div>
-      </draggable>
-      <button type="button" class="btn">New task</button>
-    </div>
-
-    <div class="column board-column">
-      <h3 class="column-title">In Progress</h3>
-      <draggable class="card-container" :list="inProgressArray" group="tasks">
-        <div
-          class="card"
-          v-for="element in inProgressArray"
-          :key="element.name"
+    <div class="row content-top-adjustment">
+      <div class="column board-column">
+        <h3 class="column-title board-primary">Aguardando Atendimento</h3>
+        <draggable
+          class="card-container"
+          :list="waitingAnswerBoard"
+          group="tasks"
         >
-          {{ element.name }}
-        </div>
-      </draggable>
-    </div>
+          <div
+            class="card"
+            v-for="element in waitingAnswerBoard"
+            :key="element.id"
+          >
+            <div class="card-container">
+              <div class="card-actions">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div>
+                <h5>Job: {{ element.code }}</h5>
+                <p>{{ element.description }}</p>
+              </div>
+            </div>
+          </div>
+        </draggable>
+      </div>
 
-    <div class="column board-column">
-      <h3 class="column-title">Done</h3>
-      <draggable class="card-container" :list="doneArray" group="tasks">
-        <div class="card" v-for="element in doneArray" :key="element.name">
-          {{ element.name }}
-        </div>
-      </draggable>
+      <div class="column board-column">
+        <h3 class="column-title board-secondary">Em atendimento</h3>
+        <draggable class="card-container" :list="onCallBoard" group="tasks">
+          <div class="card" v-for="element in onCallBoard" :key="element.id">
+            <div class="card-container">
+              <div class="card-actions">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div>
+                <h5>Job: {{ element.code }}</h5>
+                <p>{{ element.description }}</p>
+              </div>
+            </div>
+          </div>
+        </draggable>
+      </div>
+
+      <div class="column board-column ">
+        <h3 class="column-title board-warning">Aguardando Compras</h3>
+        <draggable
+          class="card-container"
+          :list="waitShoppingBoard"
+          group="tasks"
+        >
+          <div
+            class="card"
+            v-for="element in waitShoppingBoard"
+            :key="element.id"
+          >
+            <div class="card-container">
+              <div class="card-actions">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div>
+                <h5>Job: {{ element.code }}</h5>
+                <p>{{ element.description }}</p>
+              </div>
+            </div>
+          </div>
+        </draggable>
+      </div>
+
+      <div class="column board-column">
+        <h3 class="column-title board-info">Finalizado</h3>
+        <draggable class="card-container" :list="doneBoard" group="tasks">
+          <div class="card" v-for="element in doneBoard" :key="element.id">
+            <div class="card-container">
+              <div class="card-actions">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div>
+                <h5>Job: {{ element.code }}</h5>
+                <p>{{ element.description }}</p>
+              </div>
+            </div>
+          </div>
+        </draggable>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
-// import api from "../services";
 
 export default {
   name: "Board",
@@ -63,7 +102,10 @@ export default {
     draggable,
   },
   props: {
-    cards: Array,
+    cards: {
+      type: Array,
+      required: true,
+    },
   },
   mounted() {
     this.holdArray = this.cards.filter((card) =>
@@ -74,18 +116,10 @@ export default {
   data() {
     return {
       newTask: "",
-      holdArray: [],
-      backlogArray: [
-        { name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-        {
-          name:
-            "Mauris id sagittis orci. Curabitur rutrum enim id laoreet placerat.",
-        },
-        { name: "Praesent lobortis risus in mollis laoreet." },
-        { name: "Nullam vehicula eu leo at sagittis." },
-      ],
-      inProgressArray: [],
-      doneArray: [],
+      holdCards: this.cards,
+      onCallBoard: [],
+      waitShoppingBoard: [],
+      doneBoard: [],
     };
   },
   methods: {
@@ -97,8 +131,11 @@ export default {
     },
   },
   computed: {
-    filterArrayTest: () =>
-      this.cards.filter((card) => card.code.toLowerCase().includes("ma")),
+    waitingAnswerBoard() {
+      return this.holdCards.filter((card) =>
+        card.code.toLowerCase().includes("ma")
+      );
+    },
   },
 };
 </script>
@@ -119,6 +156,7 @@ export default {
 }
 .board-column {
   width: 300px;
+  height: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,13 +165,21 @@ export default {
   border-bottom-right-radius: 4px;
   padding-bottom: 10px;
   box-shadow: 0px 1px 2px 0px #8395a7d5;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 250px;
+  cursor: pointer;
 }
 .column-title {
   width: 300px;
+  padding: 20px 0;
   background-color: #8395a7;
   font-size: 1.1rem;
   color: white;
-  height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,5 +189,45 @@ export default {
 .content-top-adjustment {
   margin-top: 20px;
   justify-content: space-around;
+}
+.btn i {
+  margin: 0 2px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey; */
+  background-color: #e8eef4;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #222f3e;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #222f3e;
+}
+
+.board-primary {
+  background-color: #0abde3;
+}
+.board-secondary {
+  background-color: #0ae347;
+}
+.board-warning {
+  background-color: #e3b30a;
+}
+.board-info {
+  background-color: #0a47e3;
+}
+.board-danger {
+  background-color: #e30a31;
 }
 </style>

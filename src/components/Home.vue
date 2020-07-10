@@ -3,7 +3,7 @@
     <nav class="nav">
       <h3>KANBAN JOB</h3>
       <button type="button" @click="logout" class="btn btn-danger">
-        Log out
+        Sair
       </button>
     </nav>
     <div class="row"></div>
